@@ -39,7 +39,7 @@ func InfluxAsyncGet(writeAPI *api.WriteAPI, wcIP string) {
 		map[string]string{
 			"product":  "Gen3 HPWC",
 			"vendor":   "Tesla",
-			"location": "Garage",
+			"location": "Driveway",
 		},
 		data,
 		time.Now())
@@ -53,7 +53,7 @@ func Execute() {
 	hpwcIP := os.Getenv("HPWC_IP")
 	influxIP := os.Getenv("INFLUX_IP")
 	client := influxdb2.NewClientWithOptions(fmt.Sprintf("http://%s:8086",influxIP), "my-token", influxdb2.DefaultOptions().SetBatchSize(20))
-	writeAPI := client.WriteAPI("myorg", "hpwc")
+	writeAPI := client.WriteAPI("admin", "tesla")
 
 	// The way this is set up, these likely don't get executed on ^C.
 	defer client.Close()
